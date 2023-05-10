@@ -101,7 +101,7 @@ struct Run: AsyncParsableCommand {
   var recovery: Bool = false
 
   @Flag(help: "Boot into DFU mode") 
-  var forceDFU: Bool = false
+  var dfu: Bool = false
 
   @Flag(help: "Halt when panicked") 
   var stopOnPanic: Bool = false
