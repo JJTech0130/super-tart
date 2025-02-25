@@ -100,6 +100,18 @@ struct Run: AsyncParsableCommand {
   #endif
   var recovery: Bool = false
 
+  @Flag(help: "Boot into DFU mode") 
+  var forceDFU: Bool = false
+
+  @Flag(help: "Halt when panicked") 
+  var stopOnPanic: Bool = false
+
+  @Flag(help: "Halt when loading iBootStage1") 
+  var stopInIBootStage1: Bool = false
+
+  @Flag(help: "Halt when loading iBootStage2") 
+  var stopInIBootStage2: Bool = false
+
   #if arch(arm64)
     @Flag(help: ArgumentHelp(
       "Use screen sharing instead of the built-in UI.",

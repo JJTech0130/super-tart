@@ -25,6 +25,7 @@ enum CodingKeys: String, CodingKey {
   case macAddress
   case display
   case displayRefit
+  case debugPort
 
   // macOS-specific keys
   case ecid
@@ -54,6 +55,7 @@ struct VMConfig: Codable {
   var macAddress: VZMACAddress
   var display: VMDisplayConfig = VMDisplayConfig()
   var displayRefit: Bool?
+  var debugPort: Int = 8000
 
   init(
     platform: Platform,
@@ -124,6 +126,8 @@ struct VMConfig: Codable {
 
     display = try container.decodeIfPresent(VMDisplayConfig.self, forKey: .display) ?? VMDisplayConfig()
     displayRefit = try container.decodeIfPresent(Bool.self, forKey: .displayRefit)
+
+    debugPort = try container.decode(Int.self, forKey: .debugPort)
   }
 
   func encode(to encoder: Encoder) throws {
@@ -142,6 +146,7 @@ struct VMConfig: Codable {
     if let displayRefit = displayRefit {
       try container.encode(displayRefit, forKey: .displayRefit)
     }
+    try container.encode(debugPort, forKey: .debugPort)
   }
 
   mutating func setCPU(cpuCount: Int) throws {

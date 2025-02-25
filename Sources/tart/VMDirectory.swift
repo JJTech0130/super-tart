@@ -26,6 +26,9 @@ struct VMDirectory: Prunable {
   var manifestURL: URL {
     baseURL.appendingPathComponent("manifest.json")
   }
+  var romURL: URL {
+    baseURL.appendingPathComponent("AVPBooter.vmapple2.bin")
+  }
 
   var explicitlyPulledMark: URL {
     baseURL.appendingPathComponent(".explicitly-pulled")
@@ -87,7 +90,8 @@ struct VMDirectory: Prunable {
   var initialized: Bool {
     FileManager.default.fileExists(atPath: configURL.path) &&
       FileManager.default.fileExists(atPath: diskURL.path) &&
-      FileManager.default.fileExists(atPath: nvramURL.path)
+      FileManager.default.fileExists(atPath: nvramURL.path) &&
+      FileManager.default.fileExists(atPath: romURL.path)
   }
 
   func initialize(overwrite: Bool = false) throws {
